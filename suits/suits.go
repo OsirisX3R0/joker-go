@@ -13,6 +13,7 @@ const (
 	Hearts
 	Diamonds
 	Joker
+	DEFAULT
 )
 
 func SuitFrom(abbr string) (Suit, error) {

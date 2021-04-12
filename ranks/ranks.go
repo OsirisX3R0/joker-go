@@ -22,6 +22,7 @@ const (
 	King
 	Ace
 	Joker
+	DEFUALT
 )
 
 func RankFrom(abbr string) (Rank, error) {
