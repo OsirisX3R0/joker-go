@@ -1,6 +1,9 @@
 package suits
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+)
 
 type Suit int
 
@@ -13,6 +16,8 @@ const (
 )
 
 func SuitFrom(abbr string) (Suit, error) {
+	errorText := fmt.Sprintf("%v Not a valid suit", abbr)
+
 	switch abbr {
 	case "C":
 		return Clubs, nil
@@ -25,36 +30,24 @@ func SuitFrom(abbr string) (Suit, error) {
 	case "":
 		return Joker, nil
 	default:
-		return Joker, errors.New("Not a valid suit")
+		return Joker, errors.New(errorText)
 	}
 }
 
 func (s Suit) String() string {
-	switch s {
-	case Clubs:
-		return "C"
-	case Spades:
-		return "S"
-	case Hearts:
-		return "H"
-	case Diamonds:
-		return "D"
-	default:
-		return ""
-	}
+	return [...]string{
+		"C",
+		"S",
+		"H",
+		"D",
+	}[s]
 }
 
 func (s Suit) Long() string {
-	switch s {
-	case Clubs:
-		return "Clubs"
-	case Spades:
-		return "Spades"
-	case Hearts:
-		return "Hearts"
-	case Diamonds:
-		return "Diamonds"
-	default:
-		return ""
-	}
+	return [...]string{
+		"Clubs",
+		"Spades",
+		"Hearts",
+		"Diamonds",
+	}[s]
 }

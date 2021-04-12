@@ -1,6 +1,9 @@
 package suits
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestCreateClubsSuit(t *testing.T) {
 	suit, err := SuitFrom("C")
@@ -69,4 +72,20 @@ func TestInvalidSuit(t *testing.T) {
 		t.Errorf("Should encounter error")
 	}
 
+}
+
+func TestFormat(t *testing.T) {
+	rank := fmt.Sprintf("%v", Hearts)
+
+	if rank != "H" {
+		t.Errorf("Should be H")
+	}
+}
+
+func TestFormatLong(t *testing.T) {
+	rank := fmt.Sprintf("%v", Hearts.Long())
+
+	if rank != "Hearts" {
+		t.Errorf("Should be Hearts")
+	}
 }
