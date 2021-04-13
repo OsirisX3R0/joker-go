@@ -12,23 +12,22 @@ type Card struct {
 	suit suits.Suit
 }
 
+var InvalidCard Card = Card{
+	rank: ranks.INVALID,
+	suit: suits.INVALID,
+}
+
 func CardFrom(rankAbbr string, suitAbbr string) (Card, error) {
 	rank, err := ranks.RankFrom(rankAbbr)
 
 	if err != nil {
-		return Card{
-			rank: ranks.DEFUALT,
-			suit: suits.DEFAULT,
-		}, err
+		return InvalidCard, err
 	}
 
 	suit, err := suits.SuitFrom(suitAbbr)
 
 	if err != nil {
-		return Card{
-			rank: ranks.DEFUALT,
-			suit: suits.DEFAULT,
-		}, err
+		return InvalidCard, err
 	}
 
 	return Card{
@@ -38,5 +37,9 @@ func CardFrom(rankAbbr string, suitAbbr string) (Card, error) {
 }
 
 func (c Card) String() string {
-	return fmt.Sprintf("%v of %v", c.rank, c.suit)
+	return fmt.Sprintf("%v%v", c.rank, c.suit)
+}
+
+func (c Card) Long() string {
+	return fmt.Sprintf("%v of %v", c.rank.Long(), c.suit.Long())
 }

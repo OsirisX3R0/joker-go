@@ -13,7 +13,7 @@ const (
 	Hearts
 	Diamonds
 	Joker
-	DEFAULT
+	INVALID
 )
 
 func SuitFrom(abbr string) (Suit, error) {
@@ -31,7 +31,7 @@ func SuitFrom(abbr string) (Suit, error) {
 	case "":
 		return Joker, nil
 	default:
-		return Joker, errors.New(errorText)
+		return INVALID, errors.New(errorText)
 	}
 }
 

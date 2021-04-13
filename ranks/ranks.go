@@ -22,7 +22,7 @@ const (
 	King
 	Ace
 	Joker
-	DEFUALT
+	INVALID
 )
 
 func RankFrom(abbr string) (Rank, error) {
@@ -58,7 +58,7 @@ func RankFrom(abbr string) (Rank, error) {
 	case "":
 		return Joker, nil
 	default:
-		return Joker, errors.New(errorText)
+		return INVALID, errors.New(errorText)
 	}
 }
 
