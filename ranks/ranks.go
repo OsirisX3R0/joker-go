@@ -55,7 +55,7 @@ func From(abbr string) (Rank, error) {
 		return King, nil
 	case "A":
 		return Ace, nil
-	case "":
+	case "X":
 		return Joker, nil
 	default:
 		return INVALID, errors.New(errorText)

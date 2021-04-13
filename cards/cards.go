@@ -17,7 +17,15 @@ var InvalidCard Card = Card{
 	suit: suits.INVALID,
 }
 
-func From(rankAbbr string, suitAbbr string) (Card, error) {
+func From(abbrs ...string) (Card, error) {
+	rankAbbr := abbrs[0]
+	var suitAbbr string
+	if len(abbrs) > 1 {
+		suitAbbr = abbrs[1]
+	} else {
+		suitAbbr = ""
+	}
+
 	rank, err := ranks.From(rankAbbr)
 
 	if err != nil {
@@ -37,9 +45,15 @@ func From(rankAbbr string, suitAbbr string) (Card, error) {
 }
 
 func (c Card) String() string {
+	if c.rank == ranks.Joker {
+		return "Jk"
+	}
 	return fmt.Sprintf("%v%v", c.rank, c.suit)
 }
 
 func (c Card) Long() string {
+	if c.rank == ranks.Joker {
+		return "Joker"
+	}
 	return fmt.Sprintf("%v of %v", c.rank.Long(), c.suit.Long())
 }

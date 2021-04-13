@@ -20,3 +20,32 @@ func TestFormatLong(t *testing.T) {
 		t.Errorf("Should be Jack")
 	}
 }
+
+func TestCreateFourRank(t *testing.T) {
+	rank, err := From("4")
+	if err != nil {
+		t.Errorf("Should be valid")
+	}
+
+	if rank.String() != "4" {
+		t.Errorf("Should be 4")
+	}
+}
+
+func TestCreateQueenRank(t *testing.T) {
+	rank, err := From("Q")
+	if err != nil {
+		t.Errorf("Should be valid")
+	}
+
+	if rank.String() != "Q" {
+		t.Errorf("Should be Q")
+	}
+}
+
+func TestInvalidRank(t *testing.T) {
+	_, err := From("M")
+	if err == nil {
+		t.Errorf("Should not be valid")
+	}
+}
