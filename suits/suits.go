@@ -16,7 +16,7 @@ const (
 	INVALID
 )
 
-func SuitFrom(abbr string) (Suit, error) {
+func From(abbr string) (Suit, error) {
 	errorText := fmt.Sprintf("%v Not a valid suit", abbr)
 
 	switch abbr {

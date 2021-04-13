@@ -17,14 +17,14 @@ var InvalidCard Card = Card{
 	suit: suits.INVALID,
 }
 
-func CardFrom(rankAbbr string, suitAbbr string) (Card, error) {
-	rank, err := ranks.RankFrom(rankAbbr)
+func From(rankAbbr string, suitAbbr string) (Card, error) {
+	rank, err := ranks.From(rankAbbr)
 
 	if err != nil {
 		return InvalidCard, err
 	}
 
-	suit, err := suits.SuitFrom(suitAbbr)
+	suit, err := suits.From(suitAbbr)
 
 	if err != nil {
 		return InvalidCard, err

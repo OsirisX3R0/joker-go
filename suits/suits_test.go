@@ -6,7 +6,7 @@ import (
 )
 
 func TestCreateClubsSuit(t *testing.T) {
-	suit, err := SuitFrom("C")
+	suit, err := From("C")
 
 	if err != nil {
 		t.Errorf("Error occured: %v", err)
@@ -18,7 +18,7 @@ func TestCreateClubsSuit(t *testing.T) {
 }
 
 func TestCreateSpadesSuit(t *testing.T) {
-	suit, err := SuitFrom("S")
+	suit, err := From("S")
 
 	if err != nil {
 		t.Errorf("Error occured: %v", err)
@@ -30,7 +30,7 @@ func TestCreateSpadesSuit(t *testing.T) {
 }
 
 func TestCreateHeartsSuit(t *testing.T) {
-	suit, err := SuitFrom("H")
+	suit, err := From("H")
 
 	if err != nil {
 		t.Errorf("Error occured: %v", err)
@@ -42,7 +42,7 @@ func TestCreateHeartsSuit(t *testing.T) {
 }
 
 func TestCreateDiamondsSuit(t *testing.T) {
-	suit, err := SuitFrom("D")
+	suit, err := From("D")
 
 	if err != nil {
 		t.Errorf("Error occured: %v", err)
@@ -54,7 +54,7 @@ func TestCreateDiamondsSuit(t *testing.T) {
 }
 
 func TestCreateJokerSuit(t *testing.T) {
-	suit, err := SuitFrom("")
+	suit, err := From("")
 
 	if err != nil {
 		t.Errorf("Error occured: %v", err)
@@ -66,7 +66,7 @@ func TestCreateJokerSuit(t *testing.T) {
 }
 
 func TestInvalidSuit(t *testing.T) {
-	_, err := SuitFrom("X")
+	_, err := From("X")
 
 	if err == nil {
 		t.Errorf("Should encounter error")

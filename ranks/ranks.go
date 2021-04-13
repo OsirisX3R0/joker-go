@@ -25,7 +25,7 @@ const (
 	INVALID
 )
 
-func RankFrom(abbr string) (Rank, error) {
+func From(abbr string) (Rank, error) {
 	errorText := fmt.Sprintf("%v not a valid Rank", abbr)
 
 	switch abbr {
