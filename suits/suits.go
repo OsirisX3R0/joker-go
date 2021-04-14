@@ -17,7 +17,7 @@ const (
 )
 
 func From(abbr string) (Suit, error) {
-	errorText := fmt.Sprintf("%v Not a valid suit", abbr)
+	errorText := fmt.Sprintf("%v Not a valid Suit", abbr)
 
 	switch abbr {
 	case "C":

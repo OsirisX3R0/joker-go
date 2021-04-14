@@ -1,6 +1,7 @@
 package cards
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/OsirisX3R0/joker-go/ranks"
@@ -18,8 +19,13 @@ var InvalidCard Card = Card{
 }
 
 func From(abbrs ...string) (Card, error) {
+	if len(abbrs) > 2 {
+		return InvalidCard, errors.New("cards.From accepts no more than 2 arguments")
+	}
+
 	rankAbbr := abbrs[0]
 	var suitAbbr string
+
 	if len(abbrs) > 1 {
 		suitAbbr = abbrs[1]
 	} else {
