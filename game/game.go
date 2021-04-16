@@ -6,11 +6,16 @@ type Game struct {
 	deck decks.Deck
 }
 
-type BaseGame interface {
-	Generate()
+type GameOptions struct {
+	numberOfDecks int
+	jokers        bool
 }
 
-func (g Game) Generate() {
+type BaseGame interface {
+	Generate(GameOptions)
+}
+
+func (g Game) Generate(o GameOptions) {
 	// do nothing by default
 	return
 }

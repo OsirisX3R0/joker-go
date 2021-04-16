@@ -9,11 +9,6 @@ type Deck struct {
 
 type Pile []cards.Card
 
-// type DeckOptions struct {
-// 	numberOfDecks int
-// 	jokers        bool
-// }
-
 func New() Deck {
 	var blankPile Pile
 
