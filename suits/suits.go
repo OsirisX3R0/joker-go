@@ -52,3 +52,13 @@ func (s Suit) Long() string {
 		"Diamonds",
 	}[s]
 }
+
+func SuitEnum() []Suit {
+	return []Suit{
+		Clubs,
+		Spades,
+		Hearts,
+		Diamonds,
+		Joker,
+	}
+}
