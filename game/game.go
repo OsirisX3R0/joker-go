@@ -1,9 +1,13 @@
 package game
 
-import "github.com/OsirisX3R0/joker-go/decks"
+import (
+	"github.com/OsirisX3R0/joker-go/decks"
+	"github.com/OsirisX3R0/joker-go/hands"
+)
 
 type Game struct {
-	deck decks.Deck
+	deck  decks.Deck
+	hands []hands.Hand
 }
 
 type GameOptions struct {
@@ -16,6 +20,8 @@ type BaseGame interface {
 }
 
 func (g Game) Generate(o GameOptions) {
-	// do nothing by default
-	return
+	// create blank properties by default default
+	g.deck = decks.New()
+	hand := hands.New()
+	g.hands = append(g.hands, hand)
 }
