@@ -115,6 +115,5 @@ func RankEnum() []Rank {
 		Queen,
 		King,
 		Ace,
-		Joker,
 	}
 }

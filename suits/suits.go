@@ -59,6 +59,5 @@ func SuitEnum() []Suit {
 		Spades,
 		Hearts,
 		Diamonds,
-		Joker,
 	}
 }

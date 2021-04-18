@@ -46,6 +46,47 @@ func (d *Deck) Discard(c cards.Card) {
 	d.discard = append(d.discard, c)
 }
 
+func (d Deck) DrawSize() int {
+	return len(d.draw)
+}
+
+func (d Deck) DiscardSize() int {
+	return len(d.discard)
+}
+
+func (d Deck) Equal(o Deck) bool {
+	equal := true
+
+	if ((d.draw == nil) != (o.draw == nil)) ||
+		d.DrawSize() != o.DrawSize() ||
+		((d.discard == nil) != (o.discard == nil)) ||
+		d.DiscardSize() != o.DiscardSize() {
+		equal = false
+	}
+
+	for i := range d.draw {
+		if equal {
+			continue
+		}
+
+		if d.draw[i] != o.draw[i] {
+			equal = false
+		}
+	}
+
+	for i := range d.discard {
+		if equal {
+			continue
+		}
+
+		if d.discard[i] != o.discard[i] {
+			equal = false
+		}
+	}
+
+	return equal
+}
+
 func (d Deck) String() string {
 	deckStr := ""
 	for _, card := range d.draw {
