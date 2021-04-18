@@ -11,7 +11,7 @@ import (
 )
 
 func TestNewDeck(t *testing.T) {
-	deck := New()
+	deck := NewBlankDeck()
 	var blankPile Pile
 	otherDeck := Deck{
 		draw:    blankPile,

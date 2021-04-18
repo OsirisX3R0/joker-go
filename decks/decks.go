@@ -15,19 +15,7 @@ type Deck struct {
 	discard Pile
 }
 
-type Pile []cards.Card
-
-func (p Pile) Contains(c cards.Card) bool {
-	for i := range p {
-		if p[i].Suit() == c.Suit() && p[i].Rank() == c.Rank() {
-			return true
-		}
-	}
-
-	return false
-}
-
-func New() Deck {
+func NewBlankDeck() Deck {
 	var blankPile Pile
 
 	return Deck{
@@ -69,77 +57,27 @@ func (d *Deck) ShuffleDiscard() {
 }
 
 func (d Deck) DrawSize() int {
-	return len(d.draw)
+	return d.draw.Size()
 }
 
 func (d Deck) DiscardSize() int {
-	return len(d.discard)
+	return d.discard.Size()
 }
 
 func (d Deck) ExactEqual(o Deck) bool {
-	equal := true
-
-	if ((d.draw == nil) != (o.draw == nil)) ||
-		d.DrawSize() != o.DrawSize() ||
-		((d.discard == nil) != (o.discard == nil)) ||
-		d.DiscardSize() != o.DiscardSize() {
-		equal = false
+	if d.draw.ExactEqual(o.draw) && d.discard.ExactEqual(o.discard) {
+		return true
 	}
 
-	for i := range d.draw {
-		if equal != true {
-			continue
-		}
-
-		if d.draw[i] != o.draw[i] {
-			equal = false
-		}
-	}
-
-	for i := range d.discard {
-		if equal != true {
-			continue
-		}
-
-		if d.discard[i] != o.discard[i] {
-			equal = false
-		}
-	}
-
-	return equal
+	return false
 }
 
 func (d Deck) Equal(o Deck) bool {
-	equal := true
-
-	if ((d.draw == nil) != (o.draw == nil)) ||
-		d.DrawSize() != o.DrawSize() ||
-		((d.discard == nil) != (o.discard == nil)) ||
-		d.DiscardSize() != o.DiscardSize() {
-		equal = false
+	if d.draw.Equal(o.draw) && d.discard.Equal(o.discard) {
+		return true
 	}
 
-	for i := range d.draw {
-		if equal != true {
-			continue
-		}
-
-		if d.draw.Contains(o.draw[i]) != true {
-			equal = false
-		}
-	}
-
-	for i := range d.discard {
-		if equal != true {
-			continue
-		}
-
-		if d.discard.Contains(o.discard[i]) != true {
-			equal = false
-		}
-	}
-
-	return equal
+	return false
 }
 
 func (d Deck) String() string {
@@ -163,7 +101,7 @@ func (d Deck) Verbose() string {
 }
 
 func NewStandardDeck() (Deck, error) {
-	deck := New()
+	deck := NewBlankDeck()
 	// for i := 1; i <= o.numberOfDecks; i++ {
 	for _, rank := range ranks.RankEnum() {
 		rankStr := fmt.Sprintf("%v", rank)
