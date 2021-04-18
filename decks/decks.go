@@ -63,6 +63,11 @@ func (d *Deck) Shuffle() {
 	rand.Shuffle(d.DrawSize(), func(i, j int) { d.draw[i], d.draw[j] = d.draw[j], d.draw[i] })
 }
 
+func (d *Deck) ShuffleDiscard() {
+	rand.Seed(time.Now().UnixNano())
+	rand.Shuffle(d.DrawSize(), func(i, j int) { d.discard[i], d.discard[j] = d.discard[j], d.discard[i] })
+}
+
 func (d Deck) DrawSize() int {
 	return len(d.draw)
 }
