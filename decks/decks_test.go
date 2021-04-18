@@ -42,7 +42,39 @@ func TestNewStandardDeck(t *testing.T) {
 		}
 	}
 
-	if deck.Equal(otherDeck) != true {
+	if deck.ExactEqual(otherDeck) != true {
 		t.Errorf("Should be equal")
+	}
+}
+
+func TestShuffle(t *testing.T) {
+	standDeck, err := NewStandardDeck()
+	if err != nil {
+		t.Errorf("Should not encounter errors")
+	}
+	shuffleDeck, err := NewStandardDeck()
+	if err != nil {
+		t.Errorf("Should not encounter errors")
+	}
+	shuffleDeck.Shuffle()
+
+	if standDeck.Equal(shuffleDeck) != true {
+		t.Errorf("Should be equal")
+	}
+}
+
+func TestShuffleExact(t *testing.T) {
+	standDeck, err := NewStandardDeck()
+	if err != nil {
+		t.Errorf("Should not encounter errors")
+	}
+	shuffleDeck, err := NewStandardDeck()
+	if err != nil {
+		t.Errorf("Should not encounter errors")
+	}
+	shuffleDeck.Shuffle()
+
+	if standDeck.ExactEqual(shuffleDeck) == true {
+		t.Errorf("Should not be equal")
 	}
 }

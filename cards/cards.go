@@ -50,6 +50,14 @@ func From(abbrs ...string) (Card, error) {
 	}, nil
 }
 
+func (c Card) Suit() suits.Suit {
+	return c.suit
+}
+
+func (c Card) Rank() ranks.Rank {
+	return c.rank
+}
+
 func (c Card) Equal(o Card) bool {
 	return c.rank == o.rank && c.suit == o.suit
 }

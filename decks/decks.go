@@ -2,6 +2,8 @@ package decks
 
 import (
 	"fmt"
+	"math/rand"
+	"time"
 
 	"github.com/OsirisX3R0/joker-go/cards"
 	"github.com/OsirisX3R0/joker-go/ranks"
@@ -14,6 +16,16 @@ type Deck struct {
 }
 
 type Pile []cards.Card
+
+func (p Pile) Contains(c cards.Card) bool {
+	for i := range p {
+		if p[i].Suit() == c.Suit() && p[i].Rank() == c.Rank() {
+			return true
+		}
+	}
+
+	return false
+}
 
 func New() Deck {
 	var blankPile Pile
@@ -46,12 +58,50 @@ func (d *Deck) Discard(c cards.Card) {
 	d.discard = append(d.discard, c)
 }
 
+func (d *Deck) Shuffle() {
+	rand.Seed(time.Now().UnixNano())
+	rand.Shuffle(d.DrawSize(), func(i, j int) { d.draw[i], d.draw[j] = d.draw[j], d.draw[i] })
+}
+
 func (d Deck) DrawSize() int {
 	return len(d.draw)
 }
 
 func (d Deck) DiscardSize() int {
 	return len(d.discard)
+}
+
+func (d Deck) ExactEqual(o Deck) bool {
+	equal := true
+
+	if ((d.draw == nil) != (o.draw == nil)) ||
+		d.DrawSize() != o.DrawSize() ||
+		((d.discard == nil) != (o.discard == nil)) ||
+		d.DiscardSize() != o.DiscardSize() {
+		equal = false
+	}
+
+	for i := range d.draw {
+		if equal != true {
+			continue
+		}
+
+		if d.draw[i] != o.draw[i] {
+			equal = false
+		}
+	}
+
+	for i := range d.discard {
+		if equal != true {
+			continue
+		}
+
+		if d.discard[i] != o.discard[i] {
+			equal = false
+		}
+	}
+
+	return equal
 }
 
 func (d Deck) Equal(o Deck) bool {
@@ -65,21 +115,21 @@ func (d Deck) Equal(o Deck) bool {
 	}
 
 	for i := range d.draw {
-		if equal {
+		if equal != true {
 			continue
 		}
 
-		if d.draw[i] != o.draw[i] {
+		if d.draw.Contains(o.draw[i]) != true {
 			equal = false
 		}
 	}
 
 	for i := range d.discard {
-		if equal {
+		if equal != true {
 			continue
 		}
 
-		if d.discard[i] != o.discard[i] {
+		if d.discard.Contains(o.discard[i]) != true {
 			equal = false
 		}
 	}
